@@ -1,6 +1,6 @@
 package com.company;
 
-public class Animal implements Competitor {
+public abstract class Animal implements Competitor {
     String type;
     String name;
 
@@ -59,9 +59,5 @@ public class Animal implements Competitor {
         }
     }
 
-    @Override
-    public void info() {
-        System.out.println(type + " " + name + " - " + onDistance);
-    }
 }
 
