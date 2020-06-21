@@ -59,5 +59,9 @@ public abstract class Animal implements Competitor {
         }
     }
 
+    @Override
+    public void info() {
+        System.out.println(type + " " + name);
+    }
 }
 

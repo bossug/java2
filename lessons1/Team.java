@@ -11,5 +11,10 @@ public class Team {
     public Competitor[] getCompetitors() {
         return competitors;
     }
-
+    public void showResults() {
+        System.out.println("В результате сошли с дистанции: ");
+        for (Competitor competitor : competitors) {
+            competitor.info();
+        }
+    }
 }

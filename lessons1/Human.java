@@ -14,6 +14,11 @@ public class Human implements Competitor {
         return active;
     }
 
+    @Override
+    public void info() {
+
+    }
+
     public Human(String name) {
         this.name = name;
         this.maxRunDistance = 5000;

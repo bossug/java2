@@ -16,5 +16,6 @@ public class Main {
         );
 
         course.doIt(team);
+        team.showResults();
     }
 }
