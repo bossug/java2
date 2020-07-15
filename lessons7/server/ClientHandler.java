@@ -1,4 +1,5 @@
-package server;
+package lessons7.server;
+
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -12,7 +13,8 @@ public class ClientHandler {
     private Server server;
     private String nick;
 
-    public ClientHandler(Server server, Socket socket){
+
+    public ClientHandler(Server server, Socket socket) throws IOException{
         try {
             this.socket = socket;
             this.server = server;
@@ -30,13 +32,13 @@ public class ClientHandler {
                                 String newNick = AuthService.getNikByLoginAndPass(tokens[1], tokens[2]);
                                 System.out.println(newNick);
                                 if(newNick != null){
-                                    if(newNick=="/dubl"){
-                                        sendMsg("Данный пользователь залогинен");
-                                    } else {
+                                    if(!server.isNickAuth(newNick)) {
                                         sendMsg("/authok");
                                         nick = newNick;
                                         server.subscribe(ClientHandler.this);
                                         break;
+                                    } else {
+                                        sendMsg("Такой ник уже используется");
                                     }
                                 } else {
                                     sendMsg("Неверный логин или пароль");
@@ -46,11 +48,18 @@ public class ClientHandler {
 
                         while (true){
                             String str = in.readUTF();
-                            if(str.equals("/end")){
-                                out.writeUTF("/serverClosed");
-                                break;
+                            if(str.startsWith("/")) {
+                                if (str.equals("/end")) {
+                                    out.writeUTF("/serverClosed");
+                                    break;
+                                }
+                                if (str.startsWith("/w")) {
+                                    String[] tokens = str.split(" ", 3);
+                                    server.sendPersonalMsg(ClientHandler.this, tokens[1], tokens[2]);
+                                }
+                            } else {
+                                server.broadcastMsg(nick + ": " + str);
                             }
-                            server.broadcastMsg(nick + ": " + str);
                         }
                     }
                     catch (IOException e){
@@ -89,5 +98,8 @@ public class ClientHandler {
         catch (IOException e){
             e.printStackTrace();
         }
+    }
+    public String getNick() {
+        return nick;
     }
 }

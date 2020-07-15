@@ -1,10 +1,7 @@
-package client;
+package lessons7.client;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 
 import javafx.event.ActionEvent;
@@ -63,11 +60,11 @@ public class Controller {
             out = new DataOutputStream(socket.getOutputStream());
 
             new Thread(new Runnable() {
-                @Override
                 public void run() {
                     try {
                         while (true){
                             String str = in.readUTF();
+                            System.out.println(str);
                             if(str.startsWith("/authok")){
                                 setAuthorized(true);
                                 break;
