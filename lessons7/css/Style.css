@@ -1,0 +1,27 @@
+#vbox{
+}
+#hbox{
+    -fx-min-height: 40px;
+    -fx-padding: 10px 10px;
+    -fx-background-color: #0971BD;
+}
+#btn1 {
+    -fx-font: 14px "Serif";
+    -fx-background-color: #0971BD;
+    -fx-pref-width: 40px;
+    -fx-pref-height: 40px;
+    -fx-background-image: url("img/img2.png");
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-border-width: none;
+}
+
+#textArea{
+    -fx-background-color: #bcacef;
+    -fx-padding: 5px;
+}
+#textField{
+    -fx-min-height: 39px;
+
+
+}
